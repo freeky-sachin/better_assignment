@@ -7,7 +7,7 @@ on:
 
 jobs:
   test:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -44,12 +44,16 @@ jobs:
         run: |
           docker push ${{ secrets.DOCKER_USERNAME }}/my-node-app:${{ github.sha }}
 
-      - name: Set up Kubernetes
-        uses: azure/setup-kubectl@v3
-        with:
-          kubeconfig: ${{ secrets.KUBECONFIG }}
+    - name: Set up Kubernetes kubeconfig
+      run: |
+        echo "${{ secrets.KUBECONFIG }}" | base64 --decode > ~/.kube/config
 
-      - name: Deploy to Kubernetes
-        run: |
-          kubectl set image deployment/node-app node-app=${{ secrets.DOCKER_USERNAME }}/my-node-app:${{ github.sha }}
-          kubectl rollout status deployment/node-app
+    - name: Verify Kubernetes context
+      run: |
+        kubectl config current-context
+        kubectl get nodes
+
+    - name: Deploy to Kubernetes
+      run: |
+        kubectl set image deployment/node-app node-app=${{ secrets.DOCKER_USERNAME }}/my-node-app:$GITHUB_SHA
+        kubectl rollout status deployment/node-app
