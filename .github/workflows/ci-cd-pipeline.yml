@@ -44,6 +44,7 @@ jobs:
         run: |
           docker push ${{ secrets.DOCKER_USERNAME }}/my-node-app:${{ github.sha }}
 
+
     - name: Set up Kubernetes kubeconfig
       run: |
         echo "${{ secrets.KUBECONFIG }}" | base64 --decode > ~/.kube/config
