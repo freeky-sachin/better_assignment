@@ -232,7 +232,7 @@ To add secrets to GitHub:
 
 1. Once you push your changes, or create a pull request, GitHub Actions will automatically trigger the pipeline.
 2. Go to the **Actions** tab in your GitHub repository to monitor the workflow’s progress.
-3. Slack notifications will inform you about the status of the deployment.
+3. Slack notifications will inform you about the status of the deployment(https://join.slack.com/t/betterassignment/shared_invite/zt-2wviddgk5-7GuWCaL7SKUzLW9_GAUXlQ).
 
 ## Troubleshooting
 
