@@ -60,7 +60,7 @@ This project includes a `Dockerfile` for containerizing the Node.js application.
 
 ```dockerfile
 # Use official Node.js image
-FROM node:14
+FROM node:18
 
 # Set the working directory in the container
 WORKDIR /app
