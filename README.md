@@ -32,8 +32,8 @@ To set up this CI/CD pipeline, you’ll need:
 Clone this repository to your local machine.
 
 ```bash
-git clone https://github.com/your-username/your-repo-name.git
-cd your-repo-name
+git clone https://github.com/freeky-sachin/better_assignment.git
+cd better_assignment
 ```
 
 ### Step 2: Setup the Node.js Application
