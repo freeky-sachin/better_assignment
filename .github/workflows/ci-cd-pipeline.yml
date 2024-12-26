@@ -57,3 +57,16 @@ jobs:
         run: |
           kubectl set image deployment/node-app node-app=${{ secrets.DOCKER_USERNAME }}/my-node-app:$GITHUB_SHA
           kubectl rollout status deployment/node-app
+
+# Send notification to Slack on success
+      - name: Send success notification to Slack
+        if: success()  # Only send this step if the job was successful
+        run: |
+          curl -X POST -H 'Content-type: application/json' --data '{"text":"Deployment successful! The app is now live."}' ${{ secrets.SLACK_WEBHOOK_URL }}
+
+    # Send notification to Slack on failure
+      - name: Send failure notification to Slack
+        if: failure()  # Only send this step if the job failed
+        run: |
+          curl -X POST -H 'Content-type: application/json' --data '{"text":"Deployment failed! Something went wrong."}' ${{ secrets.SLACK_WEBHOOK_URL }}
+
